@@ -10,20 +10,7 @@
 // U+2B24   BLACK LARGE CIRCLE (⬤)
 // U+26AC   MEDIUM SMALL WHITE CIRCLE ⚬
 // U+25CB   WHITE CIRCLE ○
-const BULLET_POINTS = [
-    "⋅",
-    "∙",
-    "🞄",
-    "•",
-    "⦁",
-    "⚫︎",
-    "●",
-    "⬤",
-    "⚬",
-    "○",
-  ];
-  
-  export { BULLET_POINTS };
+
   // Convert bullet point lines into a string array aka descriptions.
   const getBulletPointsFromLines = (lines) => {
     // Simply return all lines with text item joined together if there is no bullet point
@@ -31,9 +18,9 @@ const BULLET_POINTS = [
     if (firstBulletPointLineIndex === undefined) {
       return lines.map((line) => line.map((item) => item.text).join(" "));
     }
-  
+
     // Otherwise, process and remove bullet points
-  
+
     // Combine all lines into a single string
     let lineStr = "";
     for (let item of lines.flat()) {
@@ -44,20 +31,19 @@ const BULLET_POINTS = [
       }
       lineStr += text;
     }
-  
+
     // Get the most common bullet point
     const commonBulletPoint = getMostCommonBulletPoint(lineStr);
-  
+
     // Start line string from the beginning of the first bullet point
     const firstBulletPointIndex = lineStr.indexOf(commonBulletPoint);
     if (firstBulletPointIndex !== -1) {
       lineStr = lineStr.slice(firstBulletPointIndex);
     }
-  
+
     // Divide the single string using bullet point as divider
     return lineStr
       .split(commonBulletPoint)
       .map((text) => text.trim())
       .filter((text) => text !== "");
   };
-  
