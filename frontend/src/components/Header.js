@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,9 +27,15 @@ const Header = () => {
           <li><Link href="/contact">Contact</Link></li>
           {isLoggedIn ? (
             <li className="profile-icon" onClick={handleProfileClick} title="Profile">
-              <img src="profile-icon.png" alt="Profile" className="profile-img" />
+              <Image
+                src="/profile-icon.png" // ✅ path from /public folder
+                alt="Profile"
+                width={32}
+                height={32}
+                className="profile-img"
+              />
             </li>
-            ) : (
+          ) : (
             <li><Link href="/signin">Sign In</Link></li>
           )}
         </ul>
