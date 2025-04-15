@@ -8,7 +8,7 @@ import { ResumePDFSkills } from "./ResumePDFSkills";
 import { ResumePDFCustom } from "./ResumePDFCustom";
 import { DEFAULT_FONT_COLOR } from "../../../lib/redux/settingsSlice";
 
-export const ResumePDF = ({ resume, settings, isPDF = false }) => {
+export const ResumePDF = ({ resume, settings }) => {
   const {
     profile = {},
     workExperiences = [],
