@@ -1,43 +1,13 @@
 import { useState } from "react";
 import Loader from "../components/Loader";
-import MyResumeList from "../components/My-Resumes";
 
 const ResumeUpload = ({ onUpload }) => {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
   const [jobRole, setJobRole] = useState(null);
   const [matchScore, setMatchScore] = useState(null);
-  const [resumes, setResumes] = useState([]);
   const [showResumes, setShowResumes] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const fetchUploadedResumes = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await fetch("http://localhost:8000/api/get-resumes", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        setResumes(data.resumes || []);
-        setShowResumes(true);
-      } else {
-        setMessage(data.detail || "Failed to fetch resumes.");
-      }
-    } catch (error) {
-      setMessage("❌ Error fetching resumes.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
