@@ -5,6 +5,7 @@ import ChangePassword from './change-pass';
 import Header from '../components/Header';
 import Loader from '../components/Loader';
 import Footer from '../components/Footer';
+import Image from 'next/image';
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('Overview');
@@ -46,7 +47,7 @@ const Dashboard = () => {
       console.error('Invalid user in localStorage', err);
       router.push('/signin');
     }
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -208,11 +209,15 @@ const Dashboard = () => {
             <div className="form-group">
               <label>Profile Image</label>
               <div className="profile-image-container">
-                <img
-                  src={editedData.image || '/image.png'}
-                  alt="Profile"
-                  className="profile-image"
-                />
+                <Image
+  src={editedData.image || '/image.png'}
+  alt="Profile"
+  width={120} // customize as needed
+  height={120}
+  className="profile-image"
+  style={{ objectFit: 'cover', borderRadius: '50%' }}
+/>
+
                 {editedData.image && (
             <button
               type="button"
