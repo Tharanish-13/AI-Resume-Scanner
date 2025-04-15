@@ -13,7 +13,7 @@ const ResumeControlBar = ({ scale, setScale, documentSize, document, fileName })
     if (document && typeof pdfInstance.update === "function") {
       pdfInstance.update(); // Ensure update is only called when document is valid and update is a function
     }
-  }, [pdfInstance.update, document]);
+}, [pdfInstance, document]);
 
   return (
     <div style={{
