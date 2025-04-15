@@ -43,5 +43,5 @@ export const useSetInitialStore = () => {
       );
       dispatch(setSettings(mergedSettingsState));
     }
-  }, []);
+  }, [dispatch]);
 };
