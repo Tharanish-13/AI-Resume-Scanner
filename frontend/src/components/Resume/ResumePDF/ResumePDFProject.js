@@ -1,7 +1,7 @@
 import { View, Text } from "@react-pdf/renderer";
 import { styles, spacing } from "./styles";
 
-export const ResumePDFProject = ({ heading, projects, themeColor }) => {
+export const ResumePDFProject = ({ heading, projects }) => {
   return (
     <View style={{ marginBottom: spacing[4] }}>
       {heading && (
