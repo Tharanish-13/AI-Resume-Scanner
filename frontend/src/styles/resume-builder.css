@@ -1,0 +1,585 @@
+/* /styles/resume-builder.css */
+:root {
+  --top-nav-bar-height: 3rem;
+  --resume-padding: 1.5rem;
+  --resume-control-bar-height: 3rem;
+}
+
+/* Main container */
+.resume-builder {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 24px;
+}
+
+/* Form container */
+.resume-form {
+  width: 30%;
+  flex-basis: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Label + input wrapper */
+.label-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Input styling */
+.input-default {
+  padding: 10px 14px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-default:focus {
+  border-color: #38bdf8;
+}
+
+/* Grid layout for short inputs */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.main-container {
+  height: 100vh;
+  overflow: hidden;
+  background-color: #f9fafb;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+}
+
+.form-section {
+  background-color: #ffffff;
+  overflow-y: auto;
+  padding: var(--resume-padding);
+  border-right: 1px solid #e5e7eb;
+}
+
+.resume-section {
+  background-color: #f3f4f6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.resume-section > div {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+/* General input styling */
+.input-default {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-default:focus {
+  border-color: #38bdf8;
+}
+
+/* Label and wrapper */
+.label-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* Featured Skill Input */
+.featured-skill-input {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Circle Rating */
+.circle-rating-container {
+  display: flex;
+  gap: 6px;
+}
+
+.circle-wrapper {
+  cursor: pointer;
+}
+
+.circle {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #d1d5db;
+  transition: background-color 0.2s;
+}
+
+/* Icon buttons */
+.icon-button-icon,
+.icon-small,
+.icon-active,
+.icon-inactive {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.icon-small {
+  width: 14px;
+  height: 14px;
+}
+
+.icon-medium {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-large {
+  width: 20px;
+  height: 20px;
+}
+
+/* Optional active style */
+.active-button {
+  background-color: rgba(56, 189, 248, 0.15);
+  border-radius: 6px;
+}
+
+.icon-active {
+  color: #38bdf8;
+}
+
+.icon-inactive {
+  color: #6b7280;
+}
+
+textarea.input-default,
+.content-editable {
+  min-height: 120px;
+  resize: none;
+  font-size: 14px;
+  line-height: 1.6;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 10px 14px;
+  outline: none;
+}
+
+.resume-preview {
+  width: 70% !important;
+  flex-basis: 70%;
+  background: white;
+  padding: 40px;
+  box-shadow: 0 0 0 1px #ddd, 0 0 16px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.resume-preview h1 {
+  font-size: 20px;
+  color: #0ea5e9;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.resume-preview section {
+  margin-top: 24px;
+}
+
+.resume-preview h2 {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #0ea5e9;
+  border-bottom: 2px solid #0ea5e9;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+
+.resume-preview ul {
+  margin-top: 6px;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.resume-preview .project-title {
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+.resume-preview .tech-used {
+  font-weight: 600;
+  font-style: italic;
+  margin-top: 6px;
+}
+
+.content-editable {
+  white-space: pre-wrap;
+}
+
+.bullets-on div::before {
+  content: "• ";
+  margin-right: 6px;
+  color: #6b7280;
+}
+
+.bullets-off div::before {
+  content: none;
+}
+
+/* Disable resize */
+.no-resize {
+  resize: none;
+}
+
+
+.icon-button {
+  padding: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.icon-button:hover {
+  background-color: #e0f2fe;
+}
+
+.icon-button-icon {
+  width: 18px;
+  height: 18px;
+  color: #555;
+}
+
+/* General Layout */
+.resume-form-container {
+  max-width: 768px;
+  padding: 2rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff;
+}
+
+/* Form Section */
+.resume-form-section {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+  width: 100%;
+}
+
+/* Labels */
+.resume-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+/* Inputs & Textareas */
+.resume-input,
+.resume-textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  background-color: white;
+}
+
+.resume-input:focus,
+.resume-textarea:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.4);
+}
+
+/* Textarea */
+.resume-textarea {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+/* Section Dividers */
+.resume-divider {
+  border-top: 2px dotted #e5e7eb;
+  margin: 1.5rem 0;
+}
+
+/* Optional Group Titles */
+.resume-group-title {
+  grid-column: span 6;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+/* Button (icon toggle) */
+.bullet-icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease;
+}
+
+.bullet-icon-button:hover {
+  background-color: #f3f4f6;
+}
+
+/* Form Section Wrapper with Relative Positioning for Icon Button */
+.resume-textarea-wrapper {
+  position: relative;
+  grid-column: span 6;
+}
+
+/* Icon positioning */
+.bullet-icon-wrapper {
+  position: absolute;
+  top: 0.35rem;
+  left: 7.5rem; /* Adjust as per icon placement */
+}
+
+/* Form Buttons (Add, Delete, etc.) */
+.resume-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  border-radius: 0.375rem;
+  border: 1px solid #d1d5db;
+  background-color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.resume-button:hover {
+  background-color: #f9fafb;
+}
+
+/* Icon buttons */
+.icon-button-icon,
+.icon-small,
+.icon-active,
+.icon-inactive {
+  width: 14px;
+  height: 14px;
+  stroke-width: 1.5;
+}
+
+.icon-small {
+  width: 12px;
+  height: 12px;
+}
+
+.icon-medium {
+  width: 14px;
+  height: 14px;
+}
+
+.icon-large {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-button {
+  padding: 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.icon-button-icon {
+  width: 14px;
+  height: 14px;
+  color: #555;
+}
+
+.theme-form {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.theme-form-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.theme-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #4b5563;
+}
+
+.theme-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.theme-color-palette {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.color-box {
+  aspect-ratio: 1;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1rem;
+  transition: transform 0.2s;
+}
+
+.color-box:hover {
+  transform: scale(1.1);
+}
+
+.inline-input-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.inline-input-label-text {
+  font-size: 0.875rem;
+  color: #4b5563;
+  min-width: 8rem;
+}
+
+.inline-input {
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  width: 100%;
+  max-width: 8rem;
+}
+
+/* Font Family Selection */
+/* Font Family Selection */
+.font-family-selections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.font-option {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  text-align: center;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.font-option:hover {
+  background-color: #f3f4f6;
+}
+
+.font-option.selected {
+  background-color: #e0f2fe;
+  border-color: #38bdf8;
+  font-weight: 600;
+  color: #111827;
+}
+
+.size-option {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.size-option.selected {
+  border-color: currentColor;
+  background-color: #f8fafc;
+}
+
+/* Document Size Selection */
+.document-size-selections {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.document-option {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.document-option-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+.document-option-subtitle {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.document-option.selected {
+  border-color: currentColor;
+  background-color: #f8fafc;
+}
+

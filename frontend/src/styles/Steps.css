@@ -1,0 +1,107 @@
+/* Main container */
+/* Full white background for outer section */
+.steps-background {
+    background-color: white;
+    padding: 4rem 1rem;
+    margin-top: -100px;
+  }
+  
+.steps-container {
+    background-color: #f0f8ff; /* light blue background */
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+    text-align: center;
+  }
+  
+  /* Title at the top */
+  .steps-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #111827;
+    margin-bottom: 2rem;
+  }
+  
+  /* Steps wrapper */
+  .steps-list-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  
+  /* Steps list */
+  .steps-list {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+  }
+  
+  /* Each step block */
+  .step {
+    flex: 1;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  
+  /* Step title (with circle and heading) */
+  .step-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #111827;
+    gap: 0.6rem;
+  }
+  
+  /* Number circle styling */
+  .step-number-circle {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(to bottom right, #72aaff, #b48eff);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* White number inside the circle */
+  .step-number {
+    background-color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #5b21b6;
+    font-size: 1rem;
+  }
+  
+  /* Small description text */
+  .step-description {
+    font-size: 0.9rem;
+    color: #374151;
+  }
+  
+  /* Responsive layout for small screens */
+  @media (max-width: 768px) {
+    .steps-list-wrapper {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .steps-list {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  
+    .step {
+      padding: 0;
+      max-width: 100%;
+    }
+  }
+  

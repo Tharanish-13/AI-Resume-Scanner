@@ -1,0 +1,103 @@
+/* Hero Section Layout */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4rem 2rem;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Left Spacer (for layout alignment) */
+  .hero-spacer-left,
+  .hero-spacer-right {
+    flex: 1;
+  }
+  
+  /* Main Content Styling */
+  .hero-content {
+    flex: 2;
+    max-width: 600px;
+    margin-top: -350px;
+  }
+  
+  /* Title Styling */
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #5f2eea, #00c6ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  
+  /* Subtitle Text */
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 2rem;
+  }
+  
+  /* Create Resume Button */
+  .hero-button {
+    display: inline-block;
+    background: linear-gradient(90deg, #8e2de2, #4a00e0);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+  
+  .hero-button:hover {
+    background: linear-gradient(90deg, #7a1fd4, #3c00c2);
+  }
+  
+  /* Small Note under Button */
+  .hero-note {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  /* ATS Note Section */
+  .hero-ats-note {
+    margin-top: 2rem;
+    font-size: 0.95rem;
+    color: #333;
+  }
+  
+  .hero-parser-link {
+    color: #3a7bd5;
+    text-decoration: underline;
+  }
+  
+  /* Right-side Animation/Resume Box */
+  .hero-animation-container {
+    flex: 2;
+    max-width: 700px;
+    padding-left: 2rem;
+  }
+  
+  /* Responsive Adjustments */
+  @media screen and (max-width: 1024px) {
+    .hero-section {
+      flex-direction: column;
+      padding: 2rem 1rem;
+    }
+  
+    .hero-content,
+    .hero-animation-container {
+      max-width: 100%;
+      padding: 0;
+    }
+  
+    .hero-title {
+      font-size: 2.25rem;
+    }
+  }
+  

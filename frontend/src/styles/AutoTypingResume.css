@@ -1,0 +1,52 @@
+/* Resume Preview Container */
+.auto-typing-resume {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 100%;
+    overflow: hidden;
+    animation: fadeInScale 1s ease forwards;
+    margin-left: -50px;
+  }
+  
+  /* Responsive Scaling of the PDF */
+  .auto-typing-resume iframe {
+    width: 100%;
+    height: auto;
+    border: none;
+    transform-origin: top left;
+    margin-left: 20px;
+  }
+  
+  /* Optional hover effect */
+  .auto-typing-resume:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Animation for appearing resume */
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Mobile adjustments */
+  @media screen and (max-width: 768px) {
+    .auto-typing-resume {
+      padding: 1rem;
+      border-radius: 12px;
+    }
+  
+    .auto-typing-resume iframe {
+      transform: scale(0.5);
+    }
+  }
+  

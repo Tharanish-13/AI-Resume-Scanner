@@ -1,0 +1,52 @@
+/* Container for the features */
+.features-section {
+    margin-top: -50px;
+    background-color: #f0f8ff;
+    padding: 4rem 1rem;
+  }
+  
+  /* Grid styles */
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    justify-items: center;
+  }
+  
+  @media (min-width: 1024px) {
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4rem 2rem;
+    }
+  }
+  
+  /* Individual feature box */
+  .feature-box {
+    display: flex;
+    align-items: flex-start;
+    max-width: 24rem;
+    padding-left: 4rem;
+    position: relative;
+  }
+  
+  /* Icon style */
+  .feature-box img {
+    position: absolute;
+    top: 0.25rem;
+    left: 0;
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  /* Title */
+  .feature-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* Description */
+  .feature-desc {
+    margin-top: 0.5rem;
+    line-height: 1.5;
+  }
+  
