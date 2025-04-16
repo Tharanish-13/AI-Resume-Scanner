@@ -61,7 +61,7 @@ export default function SignIn() {
         <button type="submit">Sign In</button>
       </form>
       <p className="register-link">
-        Don't have an account? <Link href="/signup">Register</Link>
+        Don&rsquo;t have an account? <Link href="/signup">Register</Link>
       </p>
     </div>
   );
