@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 export default function Index() {
-  const [resumes, setResumes] = useState([]);
   const [loading, setLoading] = useState(true); // Start as loading
   const router = useRouter();
 
@@ -27,10 +26,7 @@ export default function Index() {
   }, [router]);
 
   const handleUpload = (file) => {
-    const newResume = {
-      name: file.name,
-    };
-    setResumes((prevResumes) => [...prevResumes, newResume]);
+    console.log("Uploaded:", file.name);
   };
 
   if (loading) return <Loader />;
