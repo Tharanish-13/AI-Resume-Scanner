@@ -6,7 +6,7 @@ const ResumeUpload = ({ onUpload }) => {
   const [message, setMessage] = useState("");
   const [jobRole, setJobRole] = useState(null);
   const [matchScore, setMatchScore] = useState(null);
-  const [showResumes, setShowResumes] = useState(false);
+  const [showResumes] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e) => {
