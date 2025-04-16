@@ -6,8 +6,8 @@ const ResumeUpload = ({ onUpload }) => {
   const [message, setMessage] = useState("");
   const [jobRole, setJobRole] = useState(null);
   const [matchScore, setMatchScore] = useState(null);
-  const [showResumes, setShowResumes] = useState(false);
   const [loading, setLoading] = useState(false);
+
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -61,7 +61,6 @@ const ResumeUpload = ({ onUpload }) => {
       setMessage("✅ Upload successful!");
       setJobRole(data.best_match);
       setMatchScore(data.match_score);
-      setShowResumes(true);
       onUpload?.(file);
     } catch (error) {
       console.error("Upload error:", error);
@@ -109,7 +108,7 @@ const ResumeUpload = ({ onUpload }) => {
 
             {message && <p className="message">{message}</p>}
 
-            {(jobRole && matchScore !== null) || showResumes ? (
+            {jobRole && matchScore !== null ? (
               <div className="result-resume-wrapper">
                 <div className="results-container">
                   {jobRole && matchScore !== null && (
