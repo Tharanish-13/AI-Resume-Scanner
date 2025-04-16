@@ -1,8 +1,3 @@
-import { BULLET_POINTS } from "../parse-resume-from-pdf/extract-resume-from-sections/lib/bullet-points";
-
-/**
- * Step 2: Group text items into lines.
- */
 export const groupTextItemsIntoLines = (textItems) => {
   const lines = [];
 
@@ -47,6 +42,7 @@ export const groupTextItemsIntoLines = (textItems) => {
   return lines;
 };
 
+const BULLET_POINTS = ["•", "‣", "◦", "-", "‒", "–", "—", "*"];
 // Helper: decide if space should be added when merging text
 const shouldAddSpaceBetweenText = (leftText, rightText) => {
   const leftTextEnd = leftText[leftText.length - 1];
