@@ -6,7 +6,7 @@ const ResumeUpload = ({ onUpload }) => {
   const [message, setMessage] = useState("");
   const [jobRole, setJobRole] = useState(null);
   const [matchScore, setMatchScore] = useState(null);
-  const [showResumes] = useState(false);
+  const [showResumes, setShowResumes] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e) => {
@@ -61,6 +61,7 @@ const ResumeUpload = ({ onUpload }) => {
       setMessage("✅ Upload successful!");
       setJobRole(data.best_match);
       setMatchScore(data.match_score);
+      setShowResumes(true);
       onUpload?.(file);
     } catch (error) {
       console.error("Upload error:", error);
