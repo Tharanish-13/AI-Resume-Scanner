@@ -1,9 +1,8 @@
 import React from "react";
 import { isBold } from "../../lib/parse-resume-from-pdf/extract-resume-from-sections/lib/common-features";
-import { extractProfile } from "../../lib/parse-resume-from-pdf/extract-resume-from-sections/extract-profile";
 import { Badge, Heading, Link, Paragraph, Table } from "../../components/documentation";
 
-export const ResumeParserAlgorithmArticle = ({ textItems, lines, sections }) => {
+export const ResumeParserAlgorithmArticle = ({ textItems, lines }) => {
   const getBadgeContent = (item) => {
     const X1 = Math.round(item.x);
     const X2 = Math.round(item.x + item.width);
@@ -45,7 +44,7 @@ export const ResumeParserAlgorithmArticle = ({ textItems, lines, sections }) => 
     <article style={{ marginTop: "2.5rem" }}>
       <Heading>Resume Parser Algorithm Deep Dive</Heading>
       <Paragraph smallMarginTop={true}>
-        This section explains how the AI Resume parser works. It's built for single-column, English-language resumes.
+        This section explains how the AI Resume parser works. It&rsquo;s built for single-column, English-language resumes.
       </Paragraph>
 
       <Heading level={2}>Step 1. Read the text items from a PDF file</Heading>
