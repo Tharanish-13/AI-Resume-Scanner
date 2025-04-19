@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// Define and export the default theme color
+export const DEFAULT_THEME_COLOR = "#38bdf8";
+
 export const initialSettings = {
   showForms: {
     workExperiences: true,
@@ -23,17 +26,14 @@ export const initialSettings = {
     skills: true,
     custom: true,
   },
-  themeColor: "#38bdf8",
+  themeColor: DEFAULT_THEME_COLOR,
 };
 
 const settingsSlice = createSlice({
   name: "settings",
   initialState: initialSettings,
   reducers: {
-    // Add setSettings reducer for full state updates
-    setSettings: (state, action) => {
-      return action.payload;
-    },
+    setSettings: (state, action) => action.payload,
     changeShowForm: (state, action) => {
       const { field, value } = action.payload;
       state.showForms[field] = value;
@@ -61,13 +61,18 @@ const settingsSlice = createSlice({
       const { field, value } = action.payload;
       state.showBulletPoints[field] = value;
     },
+    changeSettings: (state, action) => {
+  const { field, value } = action.payload;
+  // If the field is nested, you can add logic here (optional)
+  state[field] = value;
+},
     changeThemeColor: (state, action) => {
       state.themeColor = action.payload;
     },
   },
 });
 
-// Export all actions including setSettings
+// Export actions
 export const {
   setSettings,
   changeShowForm,
@@ -75,6 +80,7 @@ export const {
   changeFormOrder,
   changeShowBulletPoints,
   changeThemeColor,
+  changeSettings,
 } = settingsSlice.actions;
 
 export default settingsSlice.reducer;
