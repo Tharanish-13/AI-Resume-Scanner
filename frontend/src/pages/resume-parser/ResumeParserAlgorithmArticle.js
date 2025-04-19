@@ -52,13 +52,10 @@ export const ResumeParserAlgorithmArticle = ({ textItems, lines }) => {
         Resume Editor Using AI Resume Scanner <Link href="https://github.com/Tharanish-13/AI-Resume-Scanner">upload.js</Link> to extract text items.
       </Paragraph>
       <Paragraph>
-        {textItems.length} text items were extracted, including metadata like `x`, `y` position, boldness, and newline status.
+        {textItems.length} text items were extracted, including metadata like x, y position, boldness, and newline status.
       </Paragraph>
       <div style={{ marginTop: "1rem", maxHeight: "280px", overflowY: "auto", border: "1px solid #eee" }}>
-        <Table
-          table={step1TextItemsTable}
-          tdClassNames={["", "", ""]}
-        />
+        <Table table={step1TextItemsTable} tdClassNames={["", "", ""]} />
       </div>
 
       <Heading level={2}>Step 2. Group text items into lines</Heading>
@@ -74,3 +71,6 @@ export const ResumeParserAlgorithmArticle = ({ textItems, lines }) => {
     </article>
   );
 };
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default () => null;
