@@ -22,6 +22,7 @@ const settingsSlice = createSlice({
 
 export const { setSettings, setFormsOrder } = settingsSlice.actions;
 
+export const DEFAULT_FONT_COLOR = "#333333"; // or whatever color you want
 // Selector to get formsOrder
 export const selectFormsOrder = (state) => state.settings.formsOrder;
 
