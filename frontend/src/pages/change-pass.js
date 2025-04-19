@@ -32,7 +32,7 @@ export default function ChangePassword({ onSuccess }) {
     }
 
     try {
-      const res = await fetch("http://localhost:8000/change-password", {
+      const res = await fetch("https://ai-resume-scanner-1e01.onrender.com/change-password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
