@@ -10,7 +10,7 @@ const MyResumeList = () => {
     const token = localStorage.getItem("token");
   
     try {
-      const response = await fetch("http://localhost:8000/api/get-resumes", {
+      const response = await fetch("https://ai-resume-scanner-1e01.onrender.com/api/get-resumes", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`
