@@ -15,6 +15,8 @@ export default function SignIn() {
 
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE}/login`, {
+        
+        console.log("API Base URL:", process.env.NEXT_PUBLIC_API_BASE);
         email,
         password,
       });
