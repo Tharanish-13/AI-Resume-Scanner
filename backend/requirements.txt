@@ -9,3 +9,4 @@ datetime
 passlib
 typing
 PyJWT
+python-multipart
