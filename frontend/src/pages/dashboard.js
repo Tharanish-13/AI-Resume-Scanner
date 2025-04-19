@@ -53,7 +53,7 @@ const Dashboard = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('https://ai-resume-scanner-1e01.onrender.com/api/user-profile', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/user-profile`, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
@@ -93,7 +93,7 @@ const Dashboard = () => {
     try {
       setSaving(true);
       const token = localStorage.getItem('token');
-      const response = await fetch('https://ai-resume-scanner-1e01.onrender.com/api/update-profile', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/update-profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -157,7 +157,7 @@ const Dashboard = () => {
     try {
       setSaving(true);
       const token = localStorage.getItem('token');
-      const response = await fetch('https://ai-resume-scanner-1e01.onrender.com/api/delete-profile-image', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/delete-profile-image`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
