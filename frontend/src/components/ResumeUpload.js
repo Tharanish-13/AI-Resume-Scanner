@@ -43,7 +43,7 @@ const ResumeUpload = ({ onUpload }) => {
 
     try {
       setLoading(true);
-      const response = await fetch("http://127.0.0.1:8000/upload_resume", {
+      const response = await fetch("https://ai-resume-scanner-1e01.onrender.com/upload_resume", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
