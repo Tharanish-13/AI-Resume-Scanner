@@ -5,3 +5,7 @@ dnspython
 python-dotenv
 PyMuPDF
 python-jose
+datetime
+passlib
+bson
+typing
