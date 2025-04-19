@@ -14,10 +14,10 @@ export default function SignIn() {
     setError("");
 
     try {
-      const response = await axios.post('https://ai-resume-scanner-1e01.onrender.com/login', {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE}/login`, {
         email,
         password,
-      });      
+      });
 
       const data = response.data;
 
@@ -37,7 +37,7 @@ export default function SignIn() {
       console.error("Error:", error);
       setError(error.message);
     }
-  }
+  };
 
   return (
     <div className="signin-container">
