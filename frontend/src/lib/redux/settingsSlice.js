@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export const DEFAULT_FONT_COLOR = "#000000";
+
 export const initialSettings = {
   theme: "light",
   language: "en",
