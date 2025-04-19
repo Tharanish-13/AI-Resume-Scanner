@@ -8,7 +8,6 @@ const ResumeUpload = ({ onUpload }) => {
   const [matchScore, setMatchScore] = useState(null);
   const [loading, setLoading] = useState(false);
 
-
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
@@ -43,7 +42,7 @@ const ResumeUpload = ({ onUpload }) => {
 
     try {
       setLoading(true);
-      const response = await fetch("https://ai-resume-scanner-1e01.onrender.com/upload_resume", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/upload_resume`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
