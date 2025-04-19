@@ -27,10 +27,9 @@ const TableRow = ({ label, value, className }) => (
 );
 
 export const ResumeTable = ({ resume }) => {
-  // Validate and filter educations
   const educations = Array.isArray(resume.educations) && resume.educations.length > 0
-    ? resume.educations.filter((education) => education && education.school) // Filter out invalid entries
-    : deepClone(initialResumeState.educations); // Provide fallback if no valid entries
+    ? resume.educations.filter((education) => education && education.school)
+    : deepClone(initialResumeState.educations);
 
   return (
     <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "14px", color: "#111827", marginTop: "1rem" }}>
@@ -56,3 +55,6 @@ export const ResumeTable = ({ resume }) => {
     </table>
   );
 };
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default () => null;
