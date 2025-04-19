@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000'; // Change this to your backend URL
+const API_BASE_URL = 'https://ai-resume-scanner-1e01.onrender.com'; // Change this to your backend URL
 
 // API instance with default config
 const api = axios.create({
