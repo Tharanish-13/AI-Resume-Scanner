@@ -52,7 +52,7 @@ const resumeSlice = createSlice({
     setResume: (state, action) => {
       return action.payload;
     },
-    
+
     // Profile section updates
     changeProfile: (state, action) => {
       const { field, value } = action.payload;
@@ -135,6 +135,38 @@ const resumeSlice = createSlice({
       const { field, value } = action.payload;
       state.custom[field] = value;
     },
+
+    // Generic add section
+    addSectionInForm: (state, action) => {
+      const { form } = action.payload;
+      if (Array.isArray(state[form])) {
+        state[form].push({});
+      }
+    },
+
+    // Generic delete by index
+    deleteSectionInFormByIdx: (state, action) => {
+      const { form, idx } = action.payload;
+      if (Array.isArray(state[form])) {
+        state[form].splice(idx, 1);
+      }
+    },
+
+    // Generic move section
+    moveSectionInForm: (state, action) => {
+      const { form, idx, direction } = action.payload;
+      if (
+        Array.isArray(state[form]) &&
+        idx >= 0 &&
+        idx < state[form].length &&
+        ((direction === "up" && idx > 0) || (direction === "down" && idx < state[form].length - 1))
+      ) {
+        const newIndex = direction === "up" ? idx - 1 : idx + 1;
+        const temp = state[form][newIndex];
+        state[form][newIndex] = state[form][idx];
+        state[form][idx] = temp;
+      }
+    },
   },
 });
 
@@ -154,6 +186,9 @@ export const {
   changeSkills,
   removeSkill,
   changeCustom,
+  addSectionInForm,
+  deleteSectionInFormByIdx,
+  moveSectionInForm,
 } = resumeSlice.actions;
 
 // Selectors
