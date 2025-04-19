@@ -12,7 +12,7 @@ const Uploads = () => {
     const token = localStorage.getItem("token");
     setLoading(true); // ✅ Start loading
     try {
-      const response = await fetch("http://localhost:8000/api/get-resumes", {
+      const response = await fetch("https://ai-resume-scanner-1e01.onrender.com/api/get-resumes", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
