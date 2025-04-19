@@ -10,7 +10,7 @@ const SignUp = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch("https://ai-resume-scanner-1e01.onrender.com/register", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -18,16 +18,19 @@ const SignUp = () => {
         body: JSON.stringify({ email, password }),
       });
 
-      const result = await response.json(); // ✅ Only call once
+      const result = await response.json();
 
-    if (!response.ok) {
-      throw new Error(result.detail || result.error || "Failed to register");
-    }
+      if (!response.ok) {
+        throw new Error(result.detail || result.error || "Failed to register");
+      }
+
       console.log("Signup successful:", result);
       alert("Signup successful!");
-      // After successful signup response
+
+      // Save token and user
       localStorage.setItem("token", result.token);
       localStorage.setItem("user", JSON.stringify(result.user));
+      localStorage.setItem("user_id", result.user._id); // Optional: for consistency with SignIn
 
       router.push("/");
     } catch (error) {
