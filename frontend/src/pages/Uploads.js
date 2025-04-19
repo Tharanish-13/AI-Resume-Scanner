@@ -13,7 +13,6 @@ const Uploads = () => {
     setLoading(true); // ✅ Start loading
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/get-resumes`, {
-        console.log("API Base URL:", process.env.NEXT_PUBLIC_API_BASE);
         headers: {
           Authorization: `Bearer ${token}`,
         },
