@@ -53,6 +53,7 @@ const Dashboard = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem('token');
+        console.log(`${process.env.NEXT_PUBLIC_API_BASE}/update-profile`);
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/user-profile`, {
           headers: {
             'Content-Type': 'application/json',
