@@ -10,7 +10,7 @@ const ResumeList = () => {
     const token = localStorage.getItem("token");
   
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/resume/get-resumes`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/resume/get-resumes`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`
@@ -33,7 +33,7 @@ const ResumeList = () => {
     const encodedFilename = encodeURIComponent(fileName);
     const token = localStorage.getItem("token");
       try {
-      const response = await fetch(`http://localhost:8000/api/delete-resume/${encodedFilename}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/delete-resume/${encodedFilename}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -58,7 +58,7 @@ const ResumeList = () => {
     const token = localStorage.getItem("token");
   
     try {
-      const response = await fetch(`http://localhost:8000/api/get-resume/${filename}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/get-resume/${filename}`, {
         headers: {
           "Authorization": `Bearer ${token}`,
         }
