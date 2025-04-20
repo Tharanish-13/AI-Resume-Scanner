@@ -1,29 +1,26 @@
 from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-from routes import router
-from auth import get_current_user, ACCESS_TOKEN_EXPIRE_MINUTES
-from auth_routes import router as auth_router
-from resume_routes import router as resume_router
 from bson import ObjectId
-import uuid
 from jose import jwt
-import datetime
+import uuid
 import sys
 import os
-from database import users_collection
 from datetime import datetime, timedelta
 
+# Local imports
+from database import users_collection
+from auth import get_current_user, ACCESS_TOKEN_EXPIRE_MINUTES
+from routes import router as profile_router              # ✅ Profile routes
+from auth_routes import router as auth_router            # ✅ Auth routes
+from resume_routes import router as resume_router        # ✅ Resume routes
+
+# Allow FastAPI to recognize internal paths
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 app = FastAPI()
 
-# ✅ Include Routes
-app.include_router(router, dependencies=[Depends(get_current_user)])
-app.include_router(auth_router)
-app.include_router(resume_router, prefix="/resume", tags=["Resume Routes"])
-
-# ✅ CORS Configuration
+# ✅ CORS Configuration (for Vercel, etc.)
 app.add_middleware(
     CORSMiddleware,
     allow_origin_regex="https://.*vercel\.app",
@@ -32,21 +29,31 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ✅ JWT Secret & Algo
+# ✅ JWT Secret & Algorithm
 SECRET_KEY = "supersecretkey"
 ALGORITHM = "HS256"
 
-# ✅ BaseModel for User Auth
+# ✅ BaseModel for Authentication
 class User(BaseModel):
     email: str
     password: str
 
-# ✅ Root route
+# ✅ Register Routes
+app.include_router(
+    profile_router,
+    prefix="/profile",  # Group all profile endpoints
+    tags=["User Profile"],
+    dependencies=[Depends(get_current_user)]
+)
+app.include_router(auth_router)
+app.include_router(resume_router, prefix="/resume", tags=["Resume Routes"])
+
+# ✅ Root Route
 @app.get("/")
 def home():
     return {"message": "AI Resume Scanner Backend is Running!"}
 
-# ✅ CORS Testing Route
+# ✅ Ping Route (for CORS testing)
 @app.get("/ping")
 def ping():
     return {"message": "pong"}
@@ -58,7 +65,7 @@ async def register(user: User):
     if existing_user:
         raise HTTPException(status_code=400, detail="User already exists")
 
-    # Default values for new user
+    # Default profile structure
     user_data = {
         "email": user.email,
         "password": user.password,
@@ -74,11 +81,9 @@ async def register(user: User):
 
     result = users_collection.insert_one(user_data)
     user_data["id"] = str(result.inserted_id)
+    user_data.pop("_id", None)
 
-    if "_id" in user_data:
-        del user_data["_id"]
-
-    token = str(uuid.uuid4())  # Not JWT, just a placeholder
+    token = str(uuid.uuid4())  # Placeholder token (can replace with JWT if needed)
 
     return {
         "message": "User registered successfully",
@@ -86,7 +91,7 @@ async def register(user: User):
         "user": user_data
     }
 
-# ✅ User Login with JWT
+# ✅ User Login (with JWT)
 @app.post("/login")
 async def login(user: User):
     existing_user = users_collection.find_one({"email": user.email})
