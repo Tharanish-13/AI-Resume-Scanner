@@ -10,7 +10,7 @@ UPLOAD_DIR = "uploaded_resumes"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 
-@router.post("/upload-resume")
+@router.post("/upload_resume")
 async def upload_resume(file: UploadFile = File(...)):
     try:
         # Generate unique filename
