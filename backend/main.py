@@ -26,10 +26,7 @@ app.include_router(resume_router, prefix="/resume", tags=["Resume Routes"])
 # ✅ CORS Configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://ai-resume-scanner-7kuidqx0o-tharanish-js-projects.vercel.app",  # ✅ Vercel frontend
-        "http://localhost:3000"  # ✅ Optional: for local testing
-    ],
+    allow_origin_regex="https://.*vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
