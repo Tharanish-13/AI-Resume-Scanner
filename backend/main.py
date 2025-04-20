@@ -21,7 +21,7 @@ app.include_router(resume_router, prefix="/resume", tags=["Resume Routes"])
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://ai-resume-scanner-6cqmcj8v9-tharanish-js-projects.vercel.app/"],
+    allow_origins=["https://ai-resume-scanner-7kuidqx0o-tharanish-js-projects.vercel.app/"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
