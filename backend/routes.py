@@ -29,6 +29,7 @@ MAX_FILE_SIZE = 5 * 1024 * 1024
 @router.post("/upload_resume")
 async def upload_resume(file: UploadFile = File(...), current_user: dict = Depends(get_current_user)):
     try:
+        print("Upload resume endpoint hit!")
         file_size = 0
         temp_file_path = os.path.join(UPLOAD_FOLDER, "temp_" + file.filename)
 
