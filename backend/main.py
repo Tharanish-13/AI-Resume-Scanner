@@ -41,12 +41,17 @@ class User(BaseModel):
 # ✅ Register Routes
 app.include_router(
     profile_router,
-    prefix="/profile",  # Group all profile endpoints
+    prefix="/profile",
     tags=["User Profile"],
     dependencies=[Depends(get_current_user)]
 )
+app.include_router(
+    resume_router,  # Make sure this is correctly imported
+    prefix="/api/resume",
+    tags=["Resume Routes"],
+    dependencies=[Depends(get_current_user)]
+)
 app.include_router(auth_router)
-app.include_router(resume_router, prefix="/api/resume", tags=["Resume Routes"])
 
 # ✅ Root Route
 @app.get("/")
