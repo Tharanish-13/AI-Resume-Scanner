@@ -10,43 +10,58 @@ import uuid
 from jose import jwt
 import datetime
 import sys
-from database import users_collection
 import os
+from database import users_collection
+from datetime import datetime, timedelta
+
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 app = FastAPI()
+
+# ✅ Include Routes
 app.include_router(router, dependencies=[Depends(get_current_user)])
 app.include_router(auth_router)
 app.include_router(resume_router, prefix="/resume", tags=["Resume Routes"])
 
+# ✅ CORS Configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://ai-resume-scanner-7kuidqx0o-tharanish-js-projects.vercel.app/"],
+    allow_origins=[
+        "https://ai-resume-scanner-7kuidqx0o-tharanish-js-projects.vercel.app",  # ✅ Vercel frontend
+        "http://localhost:3000"  # ✅ Optional: for local testing
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# ✅ JWT Secret & Algo
 SECRET_KEY = "supersecretkey"
 ALGORITHM = "HS256"
 
-# ✅ User Schema
+# ✅ BaseModel for User Auth
 class User(BaseModel):
     email: str
     password: str
 
+# ✅ Root route
 @app.get("/")
 def home():
     return {"message": "AI Resume Scanner Backend is Running!"}
 
-# ✅ Registration Route with default fields
+# ✅ CORS Testing Route
+@app.get("/ping")
+def ping():
+    return {"message": "pong"}
+
+# ✅ User Registration
 @app.post("/register")
 async def register(user: User):
     existing_user = users_collection.find_one({"email": user.email})
     if existing_user:
         raise HTTPException(status_code=400, detail="User already exists")
 
-    # Insert user with all fields initialized (Type 3)
+    # Default values for new user
     user_data = {
         "email": user.email,
         "password": user.password,
@@ -61,13 +76,12 @@ async def register(user: User):
     }
 
     result = users_collection.insert_one(user_data)
-    
     user_data["id"] = str(result.inserted_id)
 
     if "_id" in user_data:
         del user_data["_id"]
 
-    token = str(uuid.uuid4())
+    token = str(uuid.uuid4())  # Not JWT, just a placeholder
 
     return {
         "message": "User registered successfully",
@@ -75,13 +89,10 @@ async def register(user: User):
         "user": user_data
     }
 
-# ✅ LOGIN Route with JWT
-from datetime import datetime, timedelta
-
+# ✅ User Login with JWT
 @app.post("/login")
 async def login(user: User):
     existing_user = users_collection.find_one({"email": user.email})
-
     if not existing_user:
         raise HTTPException(status_code=404, detail="User not found")
 
