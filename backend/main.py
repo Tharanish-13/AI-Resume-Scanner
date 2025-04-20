@@ -117,3 +117,8 @@ async def login(user: User):
             "email": existing_user["email"]
         }
     }
+@app.on_event("startup")
+async def print_routes():
+    print("\nRegistered Routes:")
+    for route in app.routes:
+        print(f"{route.path} - {route.methods}")
