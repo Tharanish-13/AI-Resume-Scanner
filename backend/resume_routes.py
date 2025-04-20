@@ -1,56 +1,115 @@
-from fastapi import APIRouter, File, UploadFile, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi import APIRouter, UploadFile, File, HTTPException, Depends
+from fastapi.responses import FileResponse, JSONResponse
+from auth import get_current_user
 import os
+import time
 import shutil
-import uuid
+from database import resumes_collection
+from bson import ObjectId
+from resume_processing import extract_text_from_pdf, calculate_match_score
 
 router = APIRouter()
 
-UPLOAD_DIR = "uploaded_resumes"
-os.makedirs(UPLOAD_DIR, exist_ok=True)
-
+UPLOAD_FOLDER = "uploads"
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 
 @router.post("/upload_resume")
-async def upload_resume(file: UploadFile = File(...)):
+async def upload_resume(file: UploadFile = File(...), current_user: dict = Depends(get_current_user)):
     try:
-        # Generate unique filename
-        filename = f"{uuid.uuid4().hex}_{file.filename}"
-        file_path = os.path.join(UPLOAD_DIR, filename)
+        # File size validation
+        file_size = 0
+        temp_file_path = os.path.join(UPLOAD_FOLDER, "temp_" + file.filename)
+        
+        with open(temp_file_path, "wb") as temp_file:
+            content = await file.read()
+            file_size = len(content)
+            if file_size > MAX_FILE_SIZE:
+                os.remove(temp_file_path)
+                raise HTTPException(status_code=400, detail="File size exceeds 5MB limit")
+            temp_file.write(content)
 
-        # Save the uploaded file
-        with open(file_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
+        # Handle filename conflicts
+        secure_filename = os.path.basename(file.filename)
+        file_path = os.path.join(UPLOAD_FOLDER, secure_filename)
+        if os.path.exists(file_path):
+            filename, ext = os.path.splitext(secure_filename)
+            file_path = os.path.join(UPLOAD_FOLDER, f"{filename}_{int(time.time())}{ext}")
 
-        return {"message": "Resume uploaded successfully", "file_path": file_path}
+        shutil.move(temp_file_path, file_path)
 
+        # Process resume
+        resume_text = extract_text_from_pdf(file_path)
+        if not resume_text:
+            raise HTTPException(status_code=400, detail="Failed to extract text from resume")
+
+        best_match, all_scores = calculate_match_score(resume_text)
+
+        # Save to database
+        resumes_collection.insert_one({
+            "email": current_user["email"],
+            "filename": os.path.basename(file_path),
+            "filepath": file_path,
+            "upload_time": time.time(),
+            "best_match": best_match,
+            "all_scores": all_scores
+        })
+
+        return {
+            "message": "Resume uploaded successfully!",
+            "file_path": file_path,
+            "best_match": best_match[0],
+            "match_score": best_match[1],
+            "all_scores": all_scores
+        }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
 
+@router.get("/get-resumes")
+def get_resumes(current_user: dict = Depends(get_current_user)):
+    try:
+        user_email = current_user["email"]
+        documents = resumes_collection.find({"email": user_email})
 
-@router.get("/parse-resume/")
-async def parse_resume(file_path: str):
-    # Placeholder logic for parsing
-    # You can plug in your AI/ML parsing model here
+        resumes = []
+        for doc in documents:
+            file_path = doc.get("filepath")
+            if not os.path.exists(file_path):
+                continue
+
+            resumes.append({
+                "name": doc["filename"],
+                "url": f"/api/resume/get-resume/{doc['filename']}",
+                "upload_time": time.ctime(doc.get("upload_time", time.time())),
+                "best_match": doc.get("best_match", ["", 0]),
+                "match_score": doc.get("best_match", ["", 0])[1]
+            })
+
+        return {"resumes": resumes}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to fetch resumes: {str(e)}")
+
+@router.get("/get-resume/{filename}")
+def get_resume_file(filename: str, current_user: dict = Depends(get_current_user)):
+    resume = resumes_collection.find_one({"filename": filename, "email": current_user["email"]})
+    if not resume:
+        raise HTTPException(status_code=404, detail="Resume not found")
+
+    file_path = resume["filepath"]
     if not os.path.exists(file_path):
-        raise HTTPException(status_code=404, detail="File not found")
+        raise HTTPException(status_code=404, detail="File missing on server")
 
-    # Simulate extracted info
-    extracted_data = {
-        "name": "John Doe",
-        "email": "john@example.com",
-        "skills": ["Python", "FastAPI", "Machine Learning"],
-        "experience": "3 years"
-    }
+    return FileResponse(file_path, filename=filename)
 
-    return JSONResponse(content=extracted_data)
+@router.delete("/delete-resume/{filename}")
+def delete_resume(filename: str, current_user: dict = Depends(get_current_user)):
+    resume = resumes_collection.find_one({"filename": filename, "email": current_user["email"]})
+    if not resume:
+        raise HTTPException(status_code=404, detail="Resume not found or permission denied")
 
+    file_path = resume["filepath"]
+    if os.path.exists(file_path):
+        os.remove(file_path)
 
-@router.get("/score-resume/")
-async def score_resume(file_path: str):
-    # Placeholder logic for scoring
-    if not os.path.exists(file_path):
-        raise HTTPException(status_code=404, detail="File not found")
-
-    # Simulate scoring logic
-    score = 85  # You can replace this with a model-based score
-    return {"score": score}
+    resumes_collection.delete_one({"_id": resume["_id"]})
+    return {"message": f"{filename} deleted successfully."}
