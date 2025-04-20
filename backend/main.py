@@ -20,17 +20,10 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 app = FastAPI()
 
-origins = [
-    "https://ai-resume-scanner-d2kuuk621-tharanish-js-projects.vercel.app",
-    "http://localhost",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000"
-]
-
 # ✅ CORS Configuration (for Vercel, etc.)
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex=origins,
+    allow_origin_regex="https://.*vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
