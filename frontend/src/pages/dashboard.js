@@ -53,8 +53,8 @@ const Dashboard = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem('token');
-        console.log(`${process.env.NEXT_PUBLIC_API_BASE}/update-profile`);
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/user-profile`, {
+        console.log(`${process.env.NEXT_PUBLIC_API_BASE}/profile/update-profile`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/profile/user-profile`, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
@@ -94,7 +94,7 @@ const Dashboard = () => {
     try {
       setSaving(true);
       const token = localStorage.getItem('token');
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/update-profile`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/profile/update-profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ const Dashboard = () => {
     try {
       setSaving(true);
       const token = localStorage.getItem('token');
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/delete-profile-image`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/profile/delete-profile-image`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
