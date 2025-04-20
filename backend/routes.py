@@ -79,7 +79,7 @@ async def upload_resume(file: UploadFile = File(...), current_user: dict = Depen
 
 
 # ✅ Get resumes uploaded by current user only
-@router.get("/api/get-resumes")
+@router.get("/get-resumes")
 def get_resumes(current_user: dict = Depends(get_current_user)):
     try:
         user_email = current_user["email"]
@@ -106,7 +106,7 @@ def get_resumes(current_user: dict = Depends(get_current_user)):
 
 
 # ✅ Serve file if it belongs to current user
-@router.get("/api/get-resume/{filename}")
+@router.get("/get-resume/{filename}")
 def get_resume_file(filename: str):
     resume = resumes_collection.find_one({"filename": filename})
     if not resume:
@@ -119,7 +119,7 @@ def get_resume_file(filename: str):
     return FileResponse(file_path, filename=filename)
 
 # ✅ Delete only your own resume
-@router.delete("/api/delete-resume/{filename}")
+@router.delete("/delete-resume/{filename}")
 def delete_resume(filename: str, current_user: dict = Depends(get_current_user)):
     print(f"Request to delete: {filename} by user {current_user['email']}")
     
@@ -152,7 +152,7 @@ class UpdateProfileRequest(BaseModel):
     image: Optional[str] = None
 
     
-@router.put("/api/update-profile")
+@router.put("/update-profile")
 async def update_profile(
     data: UpdateProfileRequest = Body(...),
     current_user: dict = Depends(get_current_user)
@@ -184,7 +184,7 @@ async def update_profile(
 
     return updated_user
 
-@router.get("/api/user-profile", response_model=UserOut)
+@router.get("/user-profile", response_model=UserOut)
 def get_user_profile(current_user=Depends(get_current_user)):
     user = users_collection.find_one({"email": current_user["email"]})
     
@@ -197,7 +197,7 @@ def get_user_profile(current_user=Depends(get_current_user)):
     return user                     
 
 # ✅ Delete profile image endpoint
-@router.delete("/api/delete-profile-image")
+@router.delete("/delete-profile-image")
 async def delete_profile_image(current_user: dict = Depends(get_current_user)):
     try:
         # Update user in database - set image to empty string
