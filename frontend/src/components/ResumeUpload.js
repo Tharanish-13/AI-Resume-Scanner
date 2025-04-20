@@ -42,7 +42,7 @@ const ResumeUpload = ({ onUpload }) => {
 
     try {
       setLoading(true);
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/resume/upload_resume`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/resume/upload_resume`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
