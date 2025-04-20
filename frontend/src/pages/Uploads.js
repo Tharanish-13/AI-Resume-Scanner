@@ -12,7 +12,7 @@ const Uploads = () => {
     const token = localStorage.getItem("token");
     setLoading(true); // ✅ Start loading
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/resume/get-resumes`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/resume/get-resumes`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
