@@ -94,7 +94,7 @@ def get_resumes(current_user: dict = Depends(get_current_user)):
 
             resumes.append({
                 "name": doc["filename"],
-                "url": f"http://localhost:8000/api/get-resume/{doc['filename']}",
+                "url": f"{process.env.BASE_URL}/api/get-resume/{doc['filename']}",
                 "upload_time": time.ctime(doc.get("upload_time", time.time())),
                 "best_match": doc.get("best_match", ["", 0]),
                 "match_score": doc.get("best_match", ["", 0])[1]
