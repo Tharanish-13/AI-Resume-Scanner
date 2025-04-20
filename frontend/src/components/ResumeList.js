@@ -10,7 +10,7 @@ const ResumeList = () => {
     const token = localStorage.getItem("token");
   
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/get-resumes`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/resume/get-resumes`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`
