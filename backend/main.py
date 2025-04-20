@@ -12,6 +12,7 @@ from datetime import datetime, timedelta
 from database import users_collection
 from auth import get_current_user, ACCESS_TOKEN_EXPIRE_MINUTES
 from routes import router as profile_router              # ✅ Profile routes
+from routes import router as router_resume
 from auth_routes import router as auth_router            # ✅ Auth routes
 from resume_routes import router as resume_router        # ✅ Resume routes
 
@@ -46,6 +47,7 @@ app.include_router(
     dependencies=[Depends(get_current_user)]
 )
 app.include_router(auth_router)
+app.include_router(router_resume, prefix="/api/resume", tags=["Resume Routes"])
 app.include_router(resume_router, prefix="/resume", tags=["Resume Routes"])
 
 # ✅ Root Route
